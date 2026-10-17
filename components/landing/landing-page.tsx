@@ -1,36 +1,57 @@
 "use client";
 
 import Link from "next/link";
-import { BellRing, Target, TrendingUp } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Shield, ArrowLeftRight, TrendingUp, HelpCircle } from "lucide-react";
 import { DashboardMockup } from "@/components/landing/dashboard-mockup";
-import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 
-// Each card describes something the app actually does today.
 const features = [
   {
-    icon: Target,
-    title: "Budgets by category",
+    icon: Shield,
+    filled: true,
+    title: "Secure Infrastructure",
     description:
-      "Set a monthly limit for food, transport, rent and more, and see what is left at a glance.",
+      "Zero-trust architecture and continuous cryptographic validation across every layer.",
   },
   {
-    icon: BellRing,
-    title: "Alerts as you spend",
+    icon: ArrowLeftRight,
+    filled: false,
+    title: "Real-time Settlement",
     description:
-      "Get a real-time alert when a category reaches 80% of its budget, and again at 100%.",
+      "Cross-border transactions with immediate finality — settlement in milliseconds, not days.",
   },
   {
     icon: TrendingUp,
-    title: "Clear analytics",
+    filled: true,
+    title: "Intelligent Analytics",
     description:
-      "Six-month trends, your top merchants, and the categories that keep running over budget.",
+      "Predictive models and customizable reporting so you keep complete oversight.",
   },
 ];
 
 export function LandingPage() {
   return (
     <div className="grid-bg flex min-h-dvh flex-col bg-background text-foreground">
-      <SiteHeader />
+      {/* Top Navigation */}
+      <header className="flex h-14 w-full shrink-0 items-center justify-between border-b border-ledger-line bg-surface px-4 md:px-10">
+        <div className="flex items-center gap-4">
+          <span className="text-lg font-extrabold tracking-tight text-ubl-blue">
+            Finora
+          </span>
+          <span className="hidden text-xs font-bold uppercase tracking-wider text-muted-foreground md:block">
+            Onboarding Wizard
+          </span>
+        </div>
+        <Button
+          variant="ghost"
+          size="sm"
+          className="gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground hover:text-ubl-blue"
+        >
+          <HelpCircle className="h-4 w-4" />
+          <span className="hidden sm:inline">Help Center</span>
+          <span className="sm:hidden">Help</span>
+        </Button>
+      </header>
 
       {/* Main Content — fills remaining height; scrolls if the screen is short */}
       <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center gap-6 px-4 py-6 md:px-10">
@@ -41,8 +62,9 @@ export function LandingPage() {
               Welcome to Finora
             </h1>
             <p className="max-w-md text-sm leading-6 text-muted-foreground md:text-base">
-              Track what you spend, set a monthly budget for each category, and
-              get an alert when you&apos;re close to a limit.
+              Institutional-grade financial infrastructure designed for
+              precision, security, and scale. Begin your setup to access the
+              full toolkit.
             </p>
             <div className="pt-2">
               {/* Plain <Link> instead of <Button asChild> — this project's
@@ -67,13 +89,17 @@ export function LandingPage() {
 
         {/* Value Proposition Cards */}
         <section className="grid shrink-0 grid-cols-1 gap-3 md:grid-cols-3">
-          {features.map(({ icon: Icon, title, description }) => (
+          {features.map(({ icon: Icon, filled, title, description }) => (
             <div
               key={title}
               className="rounded border border-ledger-line bg-surface p-4 transition-colors duration-200 hover:bg-surface-container-low"
             >
               <div className="mb-3 flex h-9 w-9 items-center justify-center rounded bg-primary-fixed text-ubl-blue">
-                <Icon className="h-[18px] w-[18px]" strokeWidth={2} />
+                <Icon
+                  className="h-[18px] w-[18px]"
+                  strokeWidth={filled ? 2.5 : 2}
+                  fill={filled ? "currentColor" : "none"}
+                />
               </div>
               <h3 className="mb-1.5 text-base font-bold tracking-tight">
                 {title}
@@ -86,7 +112,23 @@ export function LandingPage() {
         </section>
       </main>
 
-      <SiteFooter />
+      {/* Footer */}
+      <footer className="w-full shrink-0 border-t border-ledger-line bg-surface px-4 py-2.5 md:px-10">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground md:flex-row">
+          <span>© {new Date().getFullYear()} Finora Institutional. All rights reserved.</span>
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+            <Link href="#" className="transition-colors hover:text-ubl-blue">
+              Privacy Policy
+            </Link>
+            <Link href="#" className="transition-colors hover:text-ubl-blue">
+              Terms of Service
+            </Link>
+            <Link href="#" className="transition-colors hover:text-ubl-blue">
+              Security Disclosure
+            </Link>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { BellRing, Landmark, ShieldCheck } from 'lucide-react';
+import { Landmark, RefreshCw, ShieldCheck } from 'lucide-react';
 
 export default function AuthLayout({
   children,
@@ -42,18 +42,19 @@ export default function AuthLayout({
             Start your journey to financial clarity.
           </h1>
           <p className="mt-4 text-base leading-relaxed text-sidebar-foreground/70">
-            Track your spending, set budgets by category and get alerted before you go over.
+            Experience institutional-grade tools designed for precision control and strategic
+            overview of your assets.
           </p>
         </div>
 
         <div className="relative z-10 flex items-center gap-6 text-xs font-semibold tracking-wide text-sidebar-foreground/60">
           <span className="flex items-center gap-2">
             <ShieldCheck className="h-4 w-4" />
-            PRIVATE TO YOUR ACCOUNT
+            BANK-GRADE SECURITY
           </span>
           <span className="flex items-center gap-2">
-            <BellRing className="h-4 w-4" />
-            REAL-TIME ALERTS
+            <RefreshCw className="h-4 w-4" />
+            REAL-TIME SYNC
           </span>
         </div>
       </div>
