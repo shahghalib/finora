@@ -13,7 +13,16 @@ export function middleware(request: NextRequest) {
   // there's a session, so it should never force-redirect to /login.
   const isLandingPage = request.nextUrl.pathname === '/';
 
-  const isPublicPage = isAuthPage || isOnboardingPage || isLandingPage;
+  // Help, Privacy and Terms are readable without an account (the signup form
+  // links to the last two before anyone has signed up).
+  const isInfoPage = ['/help', '/privacy', '/terms'].some(
+    (path) =>
+      request.nextUrl.pathname === path ||
+      request.nextUrl.pathname.startsWith(`${path}/`)
+  );
+
+  const isPublicPage =
+    isAuthPage || isOnboardingPage || isLandingPage || isInfoPage;
 
   // If there's no token and trying to access a protected route → redirect to login
   if (!token && !isPublicPage) {
@@ -29,5 +38,10 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
-};
+  // Skip the API, Next's own assets and static image files. Without the image
+  // extensions, /icon.svg and /apple-icon.png redirected signed-out visitors
+  // to /login, so the favicon never loaded on the landing and login pages.
+  matcher: [
+    '/((?!api|_next/static|_next/image|favicon.ico|.*\\.svg$|.*\\.png$|.*\\.jpg$|.*\\.jpeg$|.*\\.ico$|.*\\.webp$).*)',
+  ],
+};

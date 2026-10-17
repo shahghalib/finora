@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect, useCallback } from 'react';
+import Link from 'next/link';
 import { useMe, useUpdateProfile, useUploadProfilePicture } from '@/hooks/use-settings-data';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -230,6 +231,21 @@ export default function SettingsPage() {
               </>
             )}
           </div>
+
+          <nav
+            aria-label="Help and legal"
+            className="mt-4 flex flex-wrap justify-center gap-x-5 gap-y-1 text-xs text-muted-foreground"
+          >
+            <Link href="/help" className="transition-colors hover:text-foreground hover:underline">
+              Help
+            </Link>
+            <Link href="/privacy" className="transition-colors hover:text-foreground hover:underline">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="transition-colors hover:text-foreground hover:underline">
+              Terms of Service
+            </Link>
+          </nav>
         </div>
       </div>
     </PageContainer>

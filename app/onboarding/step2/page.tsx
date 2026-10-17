@@ -172,9 +172,6 @@ export default function OnboardingStep2() {
               <div className="space-y-1.5">
                 <Label htmlFor="initialBalance">Initial Balance</Label>
                 <div className="relative">
-                  <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-muted-foreground">
-                    $
-                  </span>
                   <Input
                     id="initialBalance"
                     type="number"
@@ -183,7 +180,7 @@ export default function OnboardingStep2() {
                     placeholder="0.00"
                     value={initialBalance}
                     onChange={(e) => setInitialBalance(e.target.value)}
-                    className="h-11 bg-background pl-7"
+                    className="h-11 bg-background"
                   />
                 </div>
               </div>
